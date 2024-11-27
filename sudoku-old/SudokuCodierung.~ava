@@ -1,0 +1,5 @@
+public class SudokuCodierung{
+  private int x = 0;
+  private int Spielfeld[][] = new int [8][8];
+  
+  }
