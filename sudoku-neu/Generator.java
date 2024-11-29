@@ -2,14 +2,14 @@ public class Generator {
 	
 	static void feldPrinter(int[][] feld) {
 		
-		System.out.println("");
+		System.out.println();
 		
 		for (int i = 0; i < feld.length; i++) {
 			for (int j = 0; j < feld[0].length; j++) {
 				System.out.print(feld[i][j] + " ");
 			}
 			
-			System.out.println("");
+			System.out.println();
 		}
 	} 
 	
@@ -20,8 +20,8 @@ public class Generator {
 		int maximum = stackCounter(stack) - 1;
 		
 		int x = (int) (Math.random() * maximum) + 1;
-		System.out.println("Zufallswert " + x);
-		return x;
+		System.out.println("Zufallswert " + stack[x]);
+		return stack[x];
 	}
 	
 	static int[] stackMover(int[] stack , int target , boolean negativ) {
@@ -29,13 +29,14 @@ public class Generator {
 		int speicher = 0; 
 		
 		if (negativ == true) {
-			for (int i = target; i > 0; i--) {
+			for (int i = target-1; i > 0; i--) {
 				speicher = stack[i];
 				stack[i] = stack[i-1];
 				stack[i-1] = speicher;
 			}
-		} else {
-			for (int i = target; i < stack.length - 1; i++) {
+		}
+		if(negativ == false) {
+			for (int i = target-1; i < stack.length - 1; i++) {
 				speicher = stack[i+1];
 				stack[i+1] = stack[i];
 				stack[i] = speicher;
@@ -49,7 +50,7 @@ public class Generator {
 		
 		for (int i = 0; i < stack.length; i++) {
 			if (stack[i] == 0) {
-				stackMover(stack , i , false);
+				stackMover(stack , i+1 , false);
 			}
 		}
 		
