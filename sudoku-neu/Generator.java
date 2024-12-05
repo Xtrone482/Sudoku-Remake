@@ -13,44 +13,68 @@ public class Generator {
 		}
 	} 
 	
-	static int stackRandom(int[] stack) {
+	static void feldPrinter(int[][][] feld) {
+		
+		System.out.println();
+		for (int k = 0; k < feld.length; k++) {
+			for (int i = 0; i < feld.length; i++) {
+				for (int j = 0; j < feld[0].length; j++) {
+					System.out.print(feld[i][j][k] + " ");
+				}
+			
+				System.out.println();
+			}
+			System.out.println();
+		}
+	}
+	
+	public static int stackRandom(int[] stack) {
 		
 		stack = stackPusher(stack);
 		
-		int maximum = stackCounter(stack) - 1;
+		System.out.println("Defaultstack");
+		for (int j = 0; j < stack.length; j++) {		
+			System.out.print(stack[j] + " ");
+		}
+		System.out.println();
 		
-		int x = (int) (Math.random() * maximum) + 1;
-		System.out.println("Zufallswert " + stack[x]);
-		return stack[x];
+		int maximum = stackCounter(stack)-1;
+		
+		int x = (int) (Math.random() * maximum)+1;
+		System.out.println();
+		System.out.println("Zufallskey  " + x);
+		return x;
 	}
 	
-	static int[] stackMover(int[] stack , int target , boolean negativ) {
+	public static int[] stackMover(int[] stack , int target , boolean negativ) {
 		
 		int speicher = 0; 
 		
 		if (negativ == true) {
-			for (int i = target-1; i > 0; i--) {
+			for (int i = target; i > 0; i--) {
 				speicher = stack[i];
 				stack[i] = stack[i-1];
 				stack[i-1] = speicher;
 			}
 		}
 		if(negativ == false) {
-			for (int i = target-1; i < stack.length - 1; i++) {
-				speicher = stack[i+1];
-				stack[i+1] = stack[i];
-				stack[i] = speicher;
+			for (int i = target; i < stack.length - 1; i++) {
+				speicher = stack[i];
+				stack[i] = stack[i+1];
+				stack[i+1] = speicher;
 			}
 		}
 		
 		return stack;
 	}
 	
-	static int[] stackPusher(int[] stack) {
+	public static int[] stackPusher(int[] stack) {
 		
-		for (int i = 0; i < stack.length; i++) {
-			if (stack[i] == 0) {
-				stackMover(stack , i+1 , false);
+		for (int j = 0; j < stack.length; j++) {
+			for (int i = 0; i < stackCounter(stack); i++) {
+				if (stack[i] == 0) {
+					stackMover(stack , i , false);
+				}
 			}
 		}
 		
@@ -70,6 +94,19 @@ public class Generator {
 		return counter;
 	}
 	
+	static int stackFinder(int[] stack , int target) {
+		
+		for (int i = 0; i < stack.length; i++) {
+			if (stack[i] == target) {
+				System.out.println("i:          " + i);
+				return i-1;
+			}
+			System.out.print("! ");
+		}
+		System.out.println("Error: key not found in finder");
+		return 0;
+	}
+	
 	static int[][] generate(int menge) {		// Menge muss {n E N: root(n) E N} sein.
 		
 		int[][][] tempFeld = new int[menge][menge][menge];
@@ -85,20 +122,17 @@ public class Generator {
 		}
 		
 		// Main
-		
-		/*
-		int[] tempStack = new int[menge];
-		for (int i = 0; i < tempStack.length; i++) {
-			System.out.println(tempStack[i]);
-		}
-		*/
+		//tempFeld[i][j] = stackMover(tempFeld[i][j] , Random , true);
 		
 		for (int i = 0; i < menge; i++) {
 			for (int j = 0; j < menge; j++) {
-				Random = stackRandom(tempFeld[i][j]);
-				tempFeld[i][j] = stackMover(tempFeld[i][j] , Random , true);
-				tempFeld = generatorFehlersuche(tempFeld , i , j);
 				
+				feldPrinter(tempFeld);
+				Random = stackRandom(tempFeld[i][j]);
+				
+				tempFeld = generatorFehlersuche(tempFeld , i , j , Random);
+				
+
 			} 
 		}
 		
@@ -115,16 +149,21 @@ public class Generator {
 		return finalFeld;
 	}
 	
-	static int[][][] generatorFehlersuche(int[][][] feld , int indikatorX , int indikatorY) {
+	static int[][][] generatorFehlersuche(int[][][] feld , int indikatorX , int indikatorY , int indikatorWert) {
 		
-		int indikatorWert = feld[indikatorX][indikatorY][0] - 1;
-		System.out.println("Pradikator  " + feld[indikatorX][indikatorY][0]);
+		//int indikatorWert = feld[indikatorX][indikatorY][0];					//muss Überarbeitet werden
 		System.out.println("Indikator   " + indikatorWert);
+		System.out.println("Pradikator  " + feld[indikatorX][indikatorY][indikatorWert]);
+		System.out.println();
 		
-		for (int i = 1; i < feld.length; i++) {
-			System.out.println(feld[indikatorX][indikatorY][i]);
-			feld[indikatorX][indikatorY][i] = 0;
+		for (int i = 0; i < feld.length; i++) {
+			System.out.print(i + ":" + feld[indikatorX][indikatorY][i] + ";  ");
+			if (i != indikatorWert) {
+				feld[indikatorX][indikatorY][i] = 0;
+			}
 		}
+		
+		
 		
 		// Reihe[]
 		for (int i = 0; i < feld.length; i++) {
@@ -168,6 +207,8 @@ public class Generator {
 				}
 			}
 		}
+
+		
 		
 		return feld;
 	}
@@ -175,9 +216,10 @@ public class Generator {
 		
 	
 	public static void main(String[] args) {
-		feldPrinter(generate(9));
-		int[] test = {1,2,3,4,5,0,7,8,9};
-		test = stackMover(test , 5 , true);
+		
+		feldPrinter(generate(4));
+		int[] test = {1,2,3,4,5,0,7,0,0,0,8,9};
+		test = stackPusher(test);
 		for (int i = 0; i < test.length; i++) {
 			//System.out.println(test[i]);
 		}
