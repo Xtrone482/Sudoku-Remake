@@ -1,0 +1,4 @@
+Mögliche Ursachen für das Problem:
+	Beschreibung:
+Sobald der Zufallskey zum zweiten Mal gewählt wird und die Ausgabe höher ist als die davor, ist die Übersetzung eine Ziffer zu hoch. Dies steigert sich linear, sobald der nächste Key noch höher ist.
+Das Problem tritt nicht auf, wenn die Zahl kleiner oder gleich
