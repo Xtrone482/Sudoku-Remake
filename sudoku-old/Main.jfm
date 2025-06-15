@@ -1,6 +1,6 @@
 object FGUIForm: TFGUIForm
-  Left = 841
-  Top = 258
+  Left = 1166
+  Top = 236
   BorderIcons = [biSystemMenu]
   Caption = 'Main'
   ClientHeight = 261
@@ -10,10 +10,14 @@ object FGUIForm: TFGUIForm
   FormStyle = fsStayOnTop
   Position = poDesigned
   Visible = True
+  OnActivate = FormActivate
   OnAfterMonitorDpiChanged = FormAfterMonitorDpiChanged
+  OnBeforeMonitorDpiChanged = FormBeforeMonitorDpiChanged
   OnCanResize = FormCanResize
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnDeactivate = FormDeactivate
   OnMouseActivate = FormMouseActivate
   OnResize = FormResize
   FrameType = 5
@@ -21,7 +25,8 @@ object FGUIForm: TFGUIForm
   Resizable = False
   Undecorated = False
   Background = clBtnFace
-  PixelsPerInch = 0
+  Title = 'Main'
+  FontSize = 9
   TextHeight = 15
   object jNumberField1: TJNumberField
     Tag = 21
@@ -44,5 +49,7 @@ object FGUIForm: TFGUIForm
     HorizontalAlignment = LEFT
     Text = ''
     Editable = True
+  end
+  object GNUgettextMarker: TGnuGettextComponentMarker
   end
 end

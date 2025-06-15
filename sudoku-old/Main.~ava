@@ -77,7 +77,7 @@ public class Main extends JFrame {
         buttons[j][i].setx(i);
         buttons[j][i].sety(j);
         buttons[j][i].setText("0");
-        buttons[j][i].setVisible(false);
+        
         cp.add(buttons[j][i]);
       }
     }
