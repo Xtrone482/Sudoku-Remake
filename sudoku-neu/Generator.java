@@ -1,4 +1,5 @@
 import Felder.genFeld;
+import Fenster.SudokuFenster;
 
 public class Generator {
 
@@ -91,7 +92,7 @@ public class Generator {
 	}
 	
 	public static void main(String[] args) {
-		feldPrinter(generate(9));
+		new SudokuFenster(generate(9));
 	}
 	
 }
