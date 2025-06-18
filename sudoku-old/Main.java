@@ -106,20 +106,14 @@ public class Main extends JFrame {
       cp.add(Zahl_buttons[i]);
       //System.out.println(Zahl_buttons[i].getx());
     }
-    
-    
-  
+
     // end components
     
     setVisible(true);
   } // end of public Main
   
   // start methods
-  
-  
-    
-    
-  
+
     
   public static void main(String[] args) {
     new Main();
