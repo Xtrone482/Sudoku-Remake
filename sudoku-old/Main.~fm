@@ -1,10 +1,10 @@
 object FGUIForm: TFGUIForm
-  Left = 841
-  Top = 258
+  Left = 451
+  Top = 156
   BorderIcons = [biSystemMenu]
   Caption = 'Main'
-  ClientHeight = 261
-  ClientWidth = 284
+  ClientHeight = 157
+  ClientWidth = 384
   Color = clBtnFace
   ParentFont = True
   FormStyle = fsStayOnTop
@@ -17,10 +17,11 @@ object FGUIForm: TFGUIForm
   OnMouseActivate = FormMouseActivate
   OnResize = FormResize
   FrameType = 5
-  Modified = False
+  Modified = True
   Resizable = False
   Undecorated = False
   Background = clBtnFace
+  PixelsPerInch = 0
   TextHeight = 15
   object jNumberField1: TJNumberField
     Tag = 21
@@ -38,6 +39,51 @@ object FGUIForm: TFGUIForm
     Foreground = 3355443
     Background = clWhite
     JavaType = 'JNumberField'
+    Focusable = True
+    Opaque = True
+    HorizontalAlignment = LEFT
+    Text = ''
+    Editable = True
+  end
+  object timer1: TTimer
+    Tag = 49
+    Left = 208
+    Top = 96
+    Width = 32
+    Height = 28
+    Hint = 'timer1'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Dialog'
+    Font.Style = [fsBold]
+    Foreground = 3355443
+    Background = 15658734
+    JavaType = 'Timer'
+    Focusable = True
+    Opaque = True
+    Coalesce = False
+    Delay = 1000
+    InitialDelay = 1000
+    LogTimers = True
+    Repeats = True
+  end
+  object jTextField1: TJTextField
+    Tag = 2
+    Left = 296
+    Top = 112
+    Width = 80
+    Height = 24
+    Cursor = crIBeam
+    Hint = 'jTextField1'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Dialog'
+    Font.Style = []
+    Foreground = 3355443
+    Background = clWhite
+    JavaType = 'JTextField'
     Focusable = True
     Opaque = True
     HorizontalAlignment = LEFT
